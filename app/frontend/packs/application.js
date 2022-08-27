@@ -18,7 +18,6 @@ import { createApp } from 'vue/dist/vue.esm-bundler'
 import List from 'components/list';
 import draggable from 'vuedraggable';
 
-
 document.addEventListener("turbolinks:load", function (event) {
   let el = document.querySelector('#board');
   if (el) {
