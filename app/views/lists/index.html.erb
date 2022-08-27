@@ -1,3 +1,7 @@
 <div id="board" class="flex mt-2 px-1" data-lists="<%= @lists.to_json(include: :cards) %>">
-  <List v-for="list in lists" :list="list" :key="list.id"></List>
+  <draggable class="flex" v-model="lists" item-key="id" @change="listMoved">
+    <template #item="{element}">
+      <List :list="element"></List>
+    </template>
+  </draggable>
 </div>

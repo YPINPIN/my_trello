@@ -16,6 +16,7 @@ ActiveStorage.start()
 
 import { createApp } from 'vue/dist/vue.esm-bundler'
 import List from 'components/list';
+import draggable from 'vuedraggable';
 
 
 document.addEventListener("turbolinks:load", function (event) {
@@ -28,7 +29,30 @@ document.addEventListener("turbolinks:load", function (event) {
         }
       },
       components: {
-        List
+        List,
+        draggable
+      },
+      methods: {
+        listMoved(event) {
+          console.log(event)
+
+          let data = new FormData();
+          data.append("list[position]", event.moved.newIndex + 1)
+
+          Rails.ajax({
+            // /lists/2/move
+            url: `/lists/${this.lists[event.moved.newIndex].id}/move`,
+            type: 'PUT',
+            data,
+            dataType: 'json',
+            success: resp => {
+              console.log(resp)
+            },
+            error: err => {
+              console.log(err)
+            }
+          })
+        }
       }
     });
 
