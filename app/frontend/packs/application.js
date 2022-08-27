@@ -15,6 +15,8 @@ ActiveStorage.start()
 // vue.js
 
 import { createApp } from 'vue/dist/vue.esm-bundler'
+import List from 'components/list';
+
 
 document.addEventListener("turbolinks:load", function (event) {
   let el = document.querySelector('#board');
@@ -24,6 +26,9 @@ document.addEventListener("turbolinks:load", function (event) {
         return {
           lists: JSON.parse(el.dataset.lists)
         }
+      },
+      components: {
+        List
       }
     });
 
