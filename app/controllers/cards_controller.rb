@@ -1,30 +1,11 @@
 class CardsController < ApplicationController
   before_action :set_card, only: %i[ show edit update destroy move]
 
-  # GET /cards or /cards.json
-  def index
-    @cards = Card.all
-  end
-
   def move
     @card.update(card_params)
     render 'show.json'
   end
 
-  # GET /cards/1 or /cards/1.json
-  def show
-  end
-
-  # GET /cards/new
-  def new
-    @card = Card.new
-  end
-
-  # GET /cards/1/edit
-  def edit
-  end
-
-  # POST /cards or /cards.json
   def create
     @card = Card.new(card_params)
 
@@ -39,7 +20,6 @@ class CardsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /cards/1 or /cards/1.json
   def update
     respond_to do |format|
       if @card.update(card_params)
@@ -52,7 +32,6 @@ class CardsController < ApplicationController
     end
   end
 
-  # DELETE /cards/1 or /cards/1.json
   def destroy
     @card.destroy
 
@@ -63,12 +42,10 @@ class CardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_card
       @card = Card.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def card_params
       params.require(:card).permit(:name, :list_id, :position)
     end
