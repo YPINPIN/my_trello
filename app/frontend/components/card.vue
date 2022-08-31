@@ -9,7 +9,7 @@
         <a href="#" class="closeButton" @click="close">
           <i class="fa-solid fa-xmark"></i>
         </a>
-        <textarea class="content" v-model="cardName"></textarea>
+        <textarea class="content" v-model="card_name"></textarea>
         <button class="updateButton" @click="update">更新</button>
       </div>
     </div>
@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       editing: false,
-      cardName: this.card.name,
+      card_name: this.card.name,
     }
   },
   props: ['card'],
@@ -33,6 +33,10 @@ export default {
     },
     update(event) {
       event.preventDefault()
+      this.$store.dispatch('updateCard', {
+        id: this.card.id,
+        name: this.card_name,
+      })
       this.editing = false
     },
   },
