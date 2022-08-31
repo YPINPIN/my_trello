@@ -1,5 +1,5 @@
 <div id="board" class="flex mt-2 px-1">
-  <draggable class="flex h-full" v-model="lists" item-key="id" @change="listMoved">
+  <draggable class="flex h-full" v-model="lists" item-key="id" @change="moveList">
     <template #item="{element}">
       <List :list="element"></List>
     </template>
