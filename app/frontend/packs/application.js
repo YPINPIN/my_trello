@@ -24,6 +24,7 @@ import Newlist from 'components/newlist';
 document.addEventListener("turbolinks:load", function (event) {
   let el = document.querySelector('#board');
   if (el) {
+    window.$store = store;
     const app = createApp({
       computed: {
         // ...mapGetters(['lists'])
