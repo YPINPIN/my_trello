@@ -20,8 +20,8 @@ const store = createStore({
     ADD_LIST(state, list) {
       state.lists.push(list);
     },
-    REMOVE_LIST(state, list_id) {
-      let list_index = state.lists.findIndex(list => list.id == list_id);
+    REMOVE_LIST(state, removeList) {
+      let list_index = state.lists.findIndex(list => list.id == removeList.id);
       state.lists.splice(list_index, 1);
     }
   },
@@ -61,9 +61,6 @@ const store = createStore({
         type: 'PUT',
         data,
         dataType: 'json',
-        success: resp => {
-          commit('REPLACE_CARD', resp);
-        },
         error: err => {
           console.log(err)
         }
@@ -79,9 +76,6 @@ const store = createStore({
         type: 'POST',
         data,
         dataType: 'json',
-        success: resp => {
-          commit('ADD_LIST', resp);
-        },
         error: err => {
           console.log(err)
         }
@@ -93,9 +87,6 @@ const store = createStore({
         url: `/lists/${list_id}`,
         type: 'DELETE',
         dataType: 'json',
-        success: resp => {
-          commit('REMOVE_LIST', list_id);
-        },
         error: err => {
           console.log(err)
         }
