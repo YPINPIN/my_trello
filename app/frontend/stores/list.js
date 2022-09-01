@@ -16,6 +16,9 @@ const store = createStore({
       let list_index = state.lists.findIndex(list => list.id == card.list_id);
       let card_index = state.lists[list_index].cards.findIndex(item => item.id == card.id)
       state.lists[list_index].cards.splice(card_index, 1, card);
+    },
+    ADD_LIST(state, list) {
+      state.lists.push(list)
     }
   },
   actions: {
@@ -56,6 +59,24 @@ const store = createStore({
         dataType: 'json',
         success: resp => {
           commit('REPLACE_CARD', resp);
+        },
+        error: err => {
+          console.log(err)
+        }
+      })
+    },
+    createList({ commit }, list_name) {
+      let data = new FormData();
+      data.append("list[name]", list_name)
+
+      Rails.ajax({
+        // /lists
+        url: `/lists`,
+        type: 'POST',
+        data,
+        dataType: 'json',
+        success: resp => {
+          commit('ADD_LIST', resp);
         },
         error: err => {
           console.log(err)

@@ -4,10 +4,12 @@
       <i class="fa-solid fa-plus"></i> 新增其它列表
     </button>
     <input
+      ref="list_name"
       v-if="creatingList"
       type="text"
       class="list_name"
       placeholder="列表標題"
+      v-model="list_name"
     />
     <button
       v-if="creatingList"
@@ -32,17 +34,22 @@ export default {
   data() {
     return {
       creatingList: false,
+      list_name: '',
     }
   },
   methods: {
     newList(event) {
       event.preventDefault()
       this.creatingList = true
+      this.$nextTick(() => {
+        this.$refs.list_name.focus()
+      })
     },
     createList(event) {
       event.preventDefault()
-      console.log('created!')
+      this.$store.dispatch('createList', this.list_name)
       this.creatingList = false
+      this.list_name = ''
     },
   },
 }
