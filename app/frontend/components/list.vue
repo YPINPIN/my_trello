@@ -1,6 +1,11 @@
 <template>
   <div class="list">
-    <h2 class="header">{{ list.name }}</h2>
+    <header>
+      <h2 class="header">{{ list.name }}</h2>
+      <a href="#" @click="deleteList">
+        <i class="fa-solid fa-trash-can"></i>
+      </a>
+    </header>
 
     <div class="deck">
       <draggable
@@ -107,6 +112,12 @@ export default {
         },
       })
     },
+    deleteList(event) {
+      event.preventDefault()
+      if (confirm('確認刪除列表?')) {
+        this.$store.dispatch('removeList', this.list.id)
+      }
+    },
   },
 }
 </script>
@@ -145,5 +156,9 @@ export default {
       }
     }
   }
+}
+
+header {
+  @apply .flex .justify-between .items-center;
 }
 </style>
